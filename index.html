@@ -1004,7 +1004,7 @@ function generatePO(){
     return{pid,name:p.name,unit:p.unit,qty,price:p.price,subtotal:sub};
   });
   const doc={id:docId,timestamp:ts,requester,note,items,total,status:'pending'};
-  poDocs.push(doc);saveLS('wms_poDocs',poDocs);
+  poDocs.push(doc);DB.append('PoDocs',doc);
   toast('สร้างคำสั่งซื้อ '+docId+' สำเร็จ','ok');
   clearPO();renderPODocs();viewPODoc(docId);
 }
@@ -1437,7 +1437,7 @@ function addNewProduct(){
   if(!id||!name||!unit||price<0){toast('กรุณากรอกข้อมูลให้ครบถ้วน','err');return}
   if(getAllProducts().find(p=>p.id===id)){toast('รหัสสินค้า "'+id+'" มีอยู่แล้ว','err');return}
   customProducts.push({id,name,unit,price});
-  saveLS('wms_custom_products',customProducts);
+  DB.append('CustomProducts',{id,name,unit,price});
   if(newProdImgData){
     productImages[id]=newProdImgData;
     saveLS('wms_product_images',productImages);
