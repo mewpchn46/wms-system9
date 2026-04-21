@@ -782,6 +782,21 @@ function getAllProducts(){
   const base = BASE_PRODUCTS.map(p=>({...p, custom:false}));
   const custom = customProducts.map(p=>({...p, custom:true}));
   return [...base, ...custom];
+  }
+  async function loadFromSheets() {
+  const [ib, ob, mv, od, pd] = await Promise.all([
+    DB.read('Inbound'),
+    DB.read('Outbound'),
+    DB.read('Movements'),
+    DB.read('OutDocs'),
+    DB.read('PoDocs'),
+  ]);
+  inbounds  = ib;
+  outbounds = ob;
+  movements = mv;
+  outDocs   = od;
+  poDocs    = pd;
+  console.log('✅ โหลดข้อมูลจาก Sheets เสร็จแล้ว');
 }
 function getProduct(id){ return getAllProducts().find(p=>p.id===id) }
 function getProductImg(pid){ return productImages[pid]||null }
