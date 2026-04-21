@@ -786,11 +786,11 @@ function getAllProducts(){
 function getProduct(id){ return getAllProducts().find(p=>p.id===id) }
 function getProductImg(pid){ return productImages[pid]||null }
 
-let inbounds  = loadLS('wms_inbound',[]);
-let outbounds = loadLS('wms_outbound',[]);
-let movements = loadLS('wms_movements',[]);
-let outDocs   = loadLS('wms_outdocs',[]);
-let poDocs    = loadLS('wms_poDocs',[]);
+let inbounds  = [];
+let outbounds = [];
+let movements = [];
+let outDocs   = [];
+let poDocs    = [];
 let pickItems = {};
 let poItems   = {};
 
