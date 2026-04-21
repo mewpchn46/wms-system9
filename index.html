@@ -1130,7 +1130,7 @@ function generatePickingList(){
     return{pid,name:p.name,unit:p.unit,qty,price:p.price,subtotal:sub};
   });
   const doc={id:docId,timestamp:ts,items,total,status:'pending',poRef:poRefId};
-  outDocs.push(doc);saveLS('wms_outdocs',outDocs);
+  outDocs.push(doc);DB.append('OutDocs',doc);
   toast('สร้างใบเบิก '+docId+' สำเร็จ','ok');
   clearPicking();renderObDocs();viewPickDoc(docId);
 }
