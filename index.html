@@ -948,9 +948,9 @@ function saveStockOut(){
   const stk=getStock(pid);
   if(qty>stk){toast('สต๊อกไม่พอ! มีเพียง '+stk+' '+getProduct(pid).unit,'err');return}
   const rec={id:autoId('OUT-',outbounds),pid,qty,reason,timestamp:now(),user:'พนักงาน'};
-  outbounds.push(rec);saveLS('wms_outbound',outbounds);
+  outbounds.push(rec);DB.append('Outbound',rec);
   movements.push({type:'OUT',docId:rec.id,pid,qty,note:reason,timestamp:rec.timestamp,user:rec.user});
-  saveLS('wms_movements',movements);
+  DB.append('Movements',movements[movements.length-1]);
   toast('ตัดสต๊อกสำเร็จ: '+qty+' '+getProduct(pid).unit,'ok');
   soClear();renderSOHist();updateAlertBadge();
 }
