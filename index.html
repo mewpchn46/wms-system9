@@ -911,9 +911,9 @@ function saveInbound(){
   const note=document.getElementById('ib-note').value;
   if(!pid||qty<1){toast('กรุณาเลือกสินค้าและกรอกจำนวน','err');return}
   const rec={id:autoId('IB-',inbounds),pid,qty,note,timestamp:now(),user:'พนักงาน'};
-  inbounds.push(rec);saveLS('wms_inbound',inbounds);
+  inbounds.push(rec);DB.append('Inbound',rec);
   movements.push({type:'IN',docId:rec.id,pid,qty,note,timestamp:rec.timestamp,user:rec.user});
-  saveLS('wms_movements',movements);
+  DB.append('Movements',movements[movements.length-1]);
   toast('บันทึกรับสินค้าสำเร็จ: '+qty+' '+getProduct(pid).unit,'ok');
   ibClear();renderIBHist();updateAlertBadge();
 }
