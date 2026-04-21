@@ -1678,19 +1678,3 @@ document.getElementById('scanner-modal').addEventListener('click',function(e){if
 </script>
 </body>
 </html>
-// Export ข้อมูลทั้งหมดจาก localStorage
-const exportData = {
-  products:  JSON.parse(localStorage.getItem('wms_products')  || '[]'),
-  inbound:   JSON.parse(localStorage.getItem('wms_inbound')   || '[]'),
-  outbound:  JSON.parse(localStorage.getItem('wms_outbound')  || '[]'),
-  orders:    JSON.parse(localStorage.getItem('wms_orders')    || '[]'),
-};
-
-// แสดงผลและ download
-console.log('ข้อมูลทั้งหมด:', JSON.stringify(exportData, null, 2));
-const blob = new Blob([JSON.stringify(exportData, null, 2)], {type:'application/json'});
-const a = document.createElement('a');
-a.href = URL.createObjectURL(blob);
-a.download = 'wms-backup.json';
-a.click();
-console.log('✅ ดาวน์โหลดไฟล์ wms-backup.json แล้ว');
