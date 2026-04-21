@@ -783,7 +783,8 @@ function getAllProducts(){
   const custom = customProducts.map(p=>({...p, custom:true}));
   return [...base, ...custom];
   }
-  async function loadFromSheets() {
+}
+async function loadFromSheets() {
   const [ib, ob, mv, od, pd] = await Promise.all([
     DB.read('Inbound'),
     DB.read('Outbound'),
